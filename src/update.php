@@ -27,7 +27,7 @@ include('templates/header.php');
                 <div class="col-md-5 mx-auto">
                     <div class="input-group mb-2">
                         <span class="input-group-text col-4">Họ và tên</span>
-                        <input type="text" class="form-control" name= "txtHoTen" ="Username"
+                        <input type="text" class="form-control" name= "txtHoTen" 
                             value="<?php echo $row['reci_name']; ?>">
                     </div>
 
@@ -38,7 +38,7 @@ include('templates/header.php');
                     </div>
                     
 
-                    <div class="input-group col"> 
+                    <div class="input-group mb-2"> 
                         <span class="input-group-text col-4" >Nhóm máu</span>
                         <input type="text" class="form-control" name="nhomMau"  
                             value="<?php echo $row['reci_bgrp']; ?>">          
@@ -73,7 +73,7 @@ include('templates/header.php');
 
 <?php
 
-   if(isset ($_GET['update']))
+   if(isset ($_POST['update']))
    {
         $hoten  = $_POST['txtHoTen'];
         $tuoi = $_POST['tuoi'];
@@ -90,13 +90,14 @@ include('templates/header.php');
         reci_bgrp= '$nhomMau',
         reci_sex='$gioitinh',
         reci_bqnty=$slMau,
-        reci_phno='$sdt',
-        WHERE reci_id= '$id'";
+        reci_phno='$sdt'
+        WHERE reci_id= $id ";
+
 
         //thưc hiện truy vấn đối vs csdl
         $query_1 = mysqli_query($conn, $sql_1); 
 
-        if((mysqli_query($conn, $sql_1))==TRUE)
+        if($query_1==TRUE)
         {
             $_SESSION['update']="<div class='text-success'>Sửa nhân viên thành công.</div>";
             header('location:' .SITEURL. 'src/index.php');
